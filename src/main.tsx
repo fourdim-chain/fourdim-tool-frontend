@@ -6,26 +6,34 @@ import {PersistGate} from 'redux-persist/lib/integration/react';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import {BrowserRouter} from 'react-router-dom';
-
-import store, {persistor} from "./state";
-
-import './index.css'
-import App from './App'
 import {SettingsProvider} from "./contexts/SettingsContext";
+import { WagmiProvider } from 'wagmi';
+import store, {persistor} from "./state";
+import {providers} from "ethers";
+
+import App from './App'
+
+import './index.css';
+
+const provider = providers.getDefaultProvider(
+    "https://bsc-dataseed1.defibit.io"
+);
 
 ReactDOM.render(
-    <HelmetProvider>
-        <ReduxProvider store={store}>
-            <PersistGate persistor={persistor} loading={null}>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <SettingsProvider>
-                        <BrowserRouter>
-                            <App/>
-                        </BrowserRouter>
-                    </SettingsProvider>
-                </LocalizationProvider>
-            </PersistGate>
-        </ReduxProvider>
-    </HelmetProvider>,
+    <WagmiProvider autoConnect provider={provider}>
+        <HelmetProvider>
+            <ReduxProvider store={store}>
+                <PersistGate persistor={persistor} loading={null}>
+                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <SettingsProvider>
+                            <BrowserRouter>
+                                <App/>
+                            </BrowserRouter>
+                        </SettingsProvider>
+                    </LocalizationProvider>
+                </PersistGate>
+            </ReduxProvider>
+        </HelmetProvider>
+    </WagmiProvider>,
     document.getElementById('root')
 )
