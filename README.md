@@ -2,6 +2,6 @@
 
 ### 运行
 ```
-> pnpm install
-> npm run dev
+> yarn
+> yarn start
 ```

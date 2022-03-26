@@ -18,7 +18,7 @@ import { updateVersion } from './global/actions'
 const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists']
 
 const migrations = {
-    0: (state) => {
+    0: (state: any) => {
         // migration add userPredictionChainlinkChartDisclaimerShow
         return {
             ...state,
@@ -74,6 +74,7 @@ export const initializeStore = (preloadedState = undefined) => {
             ...preloadedState as any,
         })
         // Reset the current store
+        // @ts-ignore
         store = undefined
     }
 

@@ -4,6 +4,7 @@ import { LazyMotion } from 'framer-motion';
 // ----------------------------------------------------------------------
 
 // eslint-disable-next-line import/extensions
+// @ts-ignore
 const loadFeatures = () => import('./features.js').then((res) => res.default);
 
 type Props = {
